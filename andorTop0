@@ -1,0 +1,61 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x858730 .scope module, "testBench" "testBench" 2 4;
+ .timescale 0 0;
+v0x8a0540_0 .net "X", 1 0, v0x89fff0_0; 1 drivers
+v0x8a0610_0 .net "XandY", 1 0, L_0x8a0880; 1 drivers
+v0x8a06e0_0 .net "XorY", 1 0, L_0x8a08e0; 1 drivers
+v0x8a07b0_0 .net "Y", 1 0, v0x8a0090_0; 1 drivers
+S_0x8a0140 .scope module, "myAndOr" "AndOr" 2 11, 3 4, S_0x858730;
+ .timescale 0 0;
+L_0x8a0880 .functor AND 2, v0x89fff0_0, v0x8a0090_0, C4<11>, C4<11>;
+L_0x8a08e0 .functor OR 2, v0x89fff0_0, v0x8a0090_0, C4<00>, C4<00>;
+v0x8a0230_0 .alias "A", 1 0, v0x8a0540_0;
+v0x8a0300_0 .alias "AandB", 1 0, v0x8a0610_0;
+v0x8a03b0_0 .alias "AorB", 1 0, v0x8a06e0_0;
+v0x8a0460_0 .alias "B", 1 0, v0x8a07b0_0;
+S_0x858820 .scope module, "aTester" "Tester" 2 14, 2 26, S_0x858730;
+ .timescale 0 0;
+P_0x88e888 .param/l "stimDelay" 2 31, +C4<010100>;
+v0x88feb0_0 .alias "XandYin", 1 0, v0x8a0610_0;
+v0x89ff50_0 .alias "XorYin", 1 0, v0x8a06e0_0;
+v0x89fff0_0 .var "xOut", 1 0;
+v0x8a0090_0 .var "yOut", 1 0;
+    .scope S_0x858820;
+T_0 ;
+    %vpi_call 2 34 "$display", "\011\011 xOut yOut \011 XandYin XorYin \011 Time ";
+    %vpi_call 2 35 "$monitor", "\011\011 %b\011 %b \011 %b \011 %b", v0x89fff0_0, v0x8a0090_0, v0x88feb0_0, v0x89ff50_0, $time;
+    %end;
+    .thread T_0;
+    .scope S_0x858820;
+T_1 ;
+    %set/v v0x89fff0_0, 0, 2;
+    %movi 8, 2, 2;
+    %set/v v0x8a0090_0, 8, 2;
+    %delay 20, 0;
+    %movi 8, 2, 2;
+    %set/v v0x89fff0_0, 8, 2;
+    %delay 20, 0;
+    %movi 8, 1, 2;
+    %set/v v0x8a0090_0, 8, 2;
+    %delay 20, 0;
+    %set/v v0x89fff0_0, 1, 2;
+    %delay 40, 0;
+    %vpi_call 2 46 "$finish";
+    %end;
+    .thread T_1;
+    .scope S_0x858730;
+T_2 ;
+    %vpi_call 2 20 "$dumpvars", 2'sb01, S_0x8a0140;
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "andorTop0.v";
+    "./andOr0.v";

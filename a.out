@@ -1,0 +1,71 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x1664870 .scope module, "testBench" "testBench" 2 4;
+ .timescale 0 0;
+v0x16991c0_0 .net "X", 0 0, L_0x1699d50; 1 drivers
+v0x1699240_0 .net "XandY", 1 0, L_0x1699770; 1 drivers
+v0x1699310_0 .net "XorY", 1 0, L_0x16997f0; 1 drivers
+v0x16993e0_0 .net "Y", 0 0, L_0x1699e40; 1 drivers
+v0x1699460_0 .net *"_s1", 0 0, C4<x>; 1 drivers
+v0x1699500_0 .net *"_s3", 0 0, L_0x16998f0; 1 drivers
+v0x16995e0_0 .net *"_s7", 0 0, C4<x>; 1 drivers
+v0x1699680_0 .net *"_s9", 0 0, L_0x1699b40; 1 drivers
+L_0x16998f0 .part L_0x1699d50, 0, 1;
+L_0x16999c0 .concat [ 1 1 0 0], L_0x16998f0, C4<x>;
+L_0x1699b40 .part L_0x1699e40, 0, 1;
+L_0x1699c10 .concat [ 1 1 0 0], L_0x1699b40, C4<x>;
+L_0x1699d50 .part/pv v0x1698cb0_0, 0, 2, 1;
+L_0x1699e40 .part/pv v0x1698d50_0, 0, 2, 1;
+S_0x1698e00 .scope module, "myAndOr" "AndOr" 2 10, 3 4, S_0x1664870;
+ .timescale 0 0;
+L_0x1699770 .functor AND 2, L_0x16999c0, L_0x1699c10, C4<11>, C4<11>;
+L_0x16997f0 .functor OR 2, L_0x16999c0, L_0x1699c10, C4<00>, C4<00>;
+v0x1698ef0_0 .net "A", 1 0, L_0x16999c0; 1 drivers
+v0x1698fb0_0 .alias "AandB", 1 0, v0x1699240_0;
+v0x1699060_0 .alias "AorB", 1 0, v0x1699310_0;
+v0x1699110_0 .net "B", 1 0, L_0x1699c10; 1 drivers
+S_0x1650690 .scope module, "aTester" "Tester" 2 13, 2 25, S_0x1664870;
+ .timescale 0 0;
+P_0x1663348 .param/l "stimDelay" 2 30, +C4<010100>;
+v0x1650780_0 .alias "XandYin", 1 0, v0x1699240_0;
+v0x1698c10_0 .alias "XorYin", 1 0, v0x1699310_0;
+v0x1698cb0_0 .var "xOut", 1 0;
+v0x1698d50_0 .var "yOut", 1 0;
+    .scope S_0x1650690;
+T_0 ;
+    %vpi_call 2 33 "$display", "\011\011 xOut yOut \011 XandYin XorYin \011 Time ";
+    %vpi_call 2 34 "$monitor", "\011\011 %b\011 %b \011 %b \011 %b", v0x1698cb0_0, v0x1698d50_0, v0x1650780_0, v0x1698c10_0, $time;
+    %end;
+    .thread T_0;
+    .scope S_0x1650690;
+T_1 ;
+    %set/v v0x1698cb0_0, 0, 2;
+    %movi 8, 2, 2;
+    %set/v v0x1698d50_0, 8, 2;
+    %delay 20, 0;
+    %movi 8, 2, 2;
+    %set/v v0x1698cb0_0, 8, 2;
+    %delay 20, 0;
+    %movi 8, 1, 2;
+    %set/v v0x1698d50_0, 8, 2;
+    %delay 20, 0;
+    %set/v v0x1698cb0_0, 1, 2;
+    %delay 40, 0;
+    %vpi_call 2 45 "$finish";
+    %end;
+    .thread T_1;
+    .scope S_0x1664870;
+T_2 ;
+    %vpi_call 2 19 "$dumpvars", 2'sb01, S_0x1698e00;
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "andorTop0.v";
+    "./andOr0.v";
