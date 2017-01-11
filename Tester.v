@@ -35,3 +35,4 @@ module Tester (xOut, yOut, XandYin, XorYin);
 			$finish; 			// finish simulation
 		end
 endmodule
+

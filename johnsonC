@@ -1,0 +1,157 @@
+#! /usr/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0xcaf150 .scope module, "testbench" "testbench" 2 18;
+ .timescale 0 0;
+P_0xcc0fe8 .param/l "ClockDelay" 2 23, +C4<0101>;
+v0xce7120_0 .var "clk", 0 0;
+RS_0x7fbdb1f232b8 .resolv tri, L_0xce7390, L_0xce7670, L_0xce7a50, L_0xce7da0;
+v0xce71a0_0 .net8 "q", 3 0, RS_0x7fbdb1f232b8; 4 drivers
+v0xce7250_0 .var "reset", 0 0;
+S_0xcc00c0 .scope module, "counter_1" "johnsonCounter" 2 25, 2 3, S_0xcaf150;
+ .timescale 0 0;
+v0xce6d70_0 .net "clk", 0 0, v0xce7120_0; 1 drivers
+v0xce6ea0_0 .alias "q", 3 0, v0xce71a0_0;
+RS_0x7fbdb1f232e8 .resolv tri, L_0xce7430, L_0xce7760, L_0xce7af0, L_0xce7ef0;
+v0xce6f40_0 .net8 "qBar", 3 0, RS_0x7fbdb1f232e8; 4 drivers
+v0xce6fe0_0 .net "reset", 0 0, v0xce7250_0; 1 drivers
+L_0xce7390 .part/pv v0xce6bd0_0, 0, 1, 4;
+L_0xce7430 .part/pv L_0xce72d0, 0, 1, 4;
+L_0xce7520 .part RS_0x7fbdb1f232e8, 3, 1;
+L_0xce7670 .part/pv v0xce67b0_0, 1, 1, 4;
+L_0xce7760 .part/pv L_0xce7610, 1, 1, 4;
+L_0xce7850 .part RS_0x7fbdb1f232b8, 0, 1;
+L_0xce7a50 .part/pv v0xce6370_0, 2, 1, 4;
+L_0xce7af0 .part/pv L_0xce79c0, 2, 1, 4;
+L_0xce7c70 .part RS_0x7fbdb1f232b8, 1, 1;
+L_0xce7da0 .part/pv v0xce5f20_0, 3, 1, 4;
+L_0xce7ef0 .part/pv L_0xce7d10, 3, 1, 4;
+L_0xce7f90 .part RS_0x7fbdb1f232b8, 2, 1;
+S_0xce69a0 .scope module, "dff1" "DFlipFlop" 2 9, 3 1, S_0xcc00c0;
+ .timescale 0 0;
+L_0xce72d0 .functor NOT 1, v0xce6bd0_0, C4<0>, C4<0>, C4<0>;
+v0xce6a90_0 .net "D", 0 0, L_0xce7520; 1 drivers
+v0xce6b50_0 .alias "clk", 0 0, v0xce6d70_0;
+v0xce6bd0_0 .var "q", 0 0;
+v0xce6c70_0 .net "qBar", 0 0, L_0xce72d0; 1 drivers
+v0xce6cf0_0 .alias "reset", 0 0, v0xce6fe0_0;
+S_0xce6550 .scope module, "dff2" "DFlipFlop" 2 10, 3 1, S_0xcc00c0;
+ .timescale 0 0;
+L_0xce7610 .functor NOT 1, v0xce67b0_0, C4<0>, C4<0>, C4<0>;
+v0xce6640_0 .net "D", 0 0, L_0xce7850; 1 drivers
+v0xce66e0_0 .alias "clk", 0 0, v0xce6d70_0;
+v0xce67b0_0 .var "q", 0 0;
+v0xce6850_0 .net "qBar", 0 0, L_0xce7610; 1 drivers
+v0xce68d0_0 .alias "reset", 0 0, v0xce6fe0_0;
+S_0xce6110 .scope module, "dff3" "DFlipFlop" 2 11, 3 1, S_0xcc00c0;
+ .timescale 0 0;
+L_0xce79c0 .functor NOT 1, v0xce6370_0, C4<0>, C4<0>, C4<0>;
+v0xce6200_0 .net "D", 0 0, L_0xce7c70; 1 drivers
+v0xce62c0_0 .alias "clk", 0 0, v0xce6d70_0;
+v0xce6370_0 .var "q", 0 0;
+v0xce63f0_0 .net "qBar", 0 0, L_0xce79c0; 1 drivers
+v0xce64a0_0 .alias "reset", 0 0, v0xce6fe0_0;
+S_0xcae240 .scope module, "dff4" "DFlipFlop" 2 12, 3 1, S_0xcc00c0;
+ .timescale 0 0;
+L_0xce7d10 .functor NOT 1, v0xce5f20_0, C4<0>, C4<0>, C4<0>;
+v0xcae530_0 .net "D", 0 0, L_0xce7f90; 1 drivers
+v0xce5e80_0 .alias "clk", 0 0, v0xce6d70_0;
+v0xce5f20_0 .var "q", 0 0;
+v0xce5fc0_0 .net "qBar", 0 0, L_0xce7d10; 1 drivers
+v0xce6070_0 .alias "reset", 0 0, v0xce6fe0_0;
+E_0xcae360/0 .event negedge, v0xce6070_0;
+E_0xcae360/1 .event posedge, v0xce5e80_0;
+E_0xcae360 .event/or E_0xcae360/0, E_0xcae360/1;
+    .scope S_0xce69a0;
+T_0 ;
+    %wait E_0xcae360;
+    %load/v 8, v0xce6cf0_0, 1;
+    %inv 8, 1;
+    %jmp/0xz  T_0.0, 8;
+    %set/v v0xce6bd0_0, 0, 1;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/v 8, v0xce6a90_0, 1;
+    %set/v v0xce6bd0_0, 8, 1;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+    .scope S_0xce6550;
+T_1 ;
+    %wait E_0xcae360;
+    %load/v 8, v0xce68d0_0, 1;
+    %inv 8, 1;
+    %jmp/0xz  T_1.0, 8;
+    %set/v v0xce67b0_0, 0, 1;
+    %jmp T_1.1;
+T_1.0 ;
+    %load/v 8, v0xce6640_0, 1;
+    %set/v v0xce67b0_0, 8, 1;
+T_1.1 ;
+    %jmp T_1;
+    .thread T_1;
+    .scope S_0xce6110;
+T_2 ;
+    %wait E_0xcae360;
+    %load/v 8, v0xce64a0_0, 1;
+    %inv 8, 1;
+    %jmp/0xz  T_2.0, 8;
+    %set/v v0xce6370_0, 0, 1;
+    %jmp T_2.1;
+T_2.0 ;
+    %load/v 8, v0xce6200_0, 1;
+    %set/v v0xce6370_0, 8, 1;
+T_2.1 ;
+    %jmp T_2;
+    .thread T_2;
+    .scope S_0xcae240;
+T_3 ;
+    %wait E_0xcae360;
+    %load/v 8, v0xce6070_0, 1;
+    %inv 8, 1;
+    %jmp/0xz  T_3.0, 8;
+    %set/v v0xce5f20_0, 0, 1;
+    %jmp T_3.1;
+T_3.0 ;
+    %load/v 8, v0xcae530_0, 1;
+    %set/v v0xce5f20_0, 8, 1;
+T_3.1 ;
+    %jmp T_3;
+    .thread T_3;
+    .scope S_0xcaf150;
+T_4 ;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0xce7120_0, 0, 0;
+T_4.0 ;
+    %delay 2, 0;
+    %load/v 8, v0xce7120_0, 1;
+    %inv 8, 1;
+    %ix/load 0, 1, 0;
+    %assign/v0 v0xce7120_0, 0, 8;
+    %jmp T_4.0;
+    %end;
+    .thread T_4;
+    .scope S_0xcaf150;
+T_5 ;
+    %vpi_call 2 34 "$dumpfile", "johnsonCounter.vcd";
+    %vpi_call 2 35 "$dumpvars", 2'sb01, S_0xcaf150;
+    %set/v v0xce7250_0, 0, 1;
+    %delay 7, 0;
+    %set/v v0xce7250_0, 1, 1;
+    %delay 65, 0;
+    %set/v v0xce7250_0, 0, 1;
+    %delay 7, 0;
+    %set/v v0xce7250_0, 1, 1;
+    %delay 100, 0;
+    %vpi_call 2 44 "$finish";
+    %end;
+    .thread T_5;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "johnsonCounter.v";
+    "./DFlipFlop.v";

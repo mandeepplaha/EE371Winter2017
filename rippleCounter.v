@@ -1,4 +1,4 @@
-//`include "DFlipFlop.v"
+`include "DFlipFlop.v"
 
 module rippleCounter(q, clk, reset);
 	
@@ -14,7 +14,7 @@ module rippleCounter(q, clk, reset);
 
 endmodule 
 
-/*
+
 module testbench; 
 	
 	reg clk, reset; 
@@ -45,4 +45,3 @@ module testbench;
 	end 
 
 endmodule
-*/

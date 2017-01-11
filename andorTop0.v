@@ -17,7 +17,8 @@ module testBench;
 	// file for gtkwave
 	initial 
 		begin
-			// these two files support gtkwave and are required $dumpfile("andor0.vcd");
+			// these two files support gtkwave and are required 
+			$dumpfile("andor0.vcd");
 			$dumpvars(1, myAndOr); 
 		end
 endmodule
