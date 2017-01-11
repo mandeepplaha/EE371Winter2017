@@ -1,4 +1,4 @@
-`include "DFF.v"
+//`include "DFlipFlop.v"
 
 module rippleCounter(q, clk, reset);
 	
@@ -6,10 +6,10 @@ module rippleCounter(q, clk, reset);
 	output [3:0] q;
 	wire [3:0] qBar;
 
-	DFF dff1 (.q(q[0]), .qBar(qBar[0]), .D(qBar[0]), .clk(clk), .reset(reset));
-	DFF dff2 (.q(q[1]), .qBar(qBar[1]), .D(qBar[1]), .clk(qBar[0]), .reset(reset));
-	DFF dff3 (.q(q[2]), .qBar(qBar[2]), .D(qBar[2]), .clk(qBar[1]), .reset(reset));
-	DFF dff4 (.q(q[3]), .qBar(qBar[3]), .D(qBar[3]), .clk(qBar[2]), .reset(reset));
+	DFlipFlop dff1 (.q(q[0]), .qBar(qBar[0]), .D(qBar[0]), .clk(clk), .reset(reset));
+	DFlipFlop dff2 (.q(q[1]), .qBar(qBar[1]), .D(qBar[1]), .clk(q[0]), .reset(reset));
+	DFlipFlop dff3 (.q(q[2]), .qBar(qBar[2]), .D(qBar[2]), .clk(q[1]), .reset(reset));
+	DFlipFlop dff4 (.q(q[3]), .qBar(qBar[3]), .D(qBar[3]), .clk(q[2]), .reset(reset));
 
 
 endmodule 
